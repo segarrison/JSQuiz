@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Countdown</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <div id="hslink">High Scores</div>
-        <h1>Welcome to Coding Countdown</h1>
-        <div id="timerdis">Time:
-            <div id="counter"></div>
-        </div>
-        
+      <div id="hslink">High Scores</div>
+      <h1>Welcome to Coding Countdown</h1>
+      <div id="timerdis">
+        Time:
+        <div id="counter"></div>
+      </div>
     </header>
-    
+
     <div id="container">
-        <div id="start">Start Quiz!</div>
-        <div id="quiz" style="display: none">
-            <div id="question"></div>
-            
-            <div id="choices">
-                <div class="choice" id="A" onclick="checkAnswer('A')"></div>
-                <div class="choice" id="B" onclick="checkAnswer('B')"></div>
-                <div class="choice" id="C" onclick="checkAnswer('C')"></div>
-                <div class="choice" id="D" onclick="checkAnswer('D')"></div>
-            </div>
-           
+      <div id="start">Start Quiz!</div>
+      <div id="quiz" style="display: none">
+        <div id="question"></div>
+
+        <div id="choices">
+          <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+          <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+          <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+          <div class="choice" id="D" onclick="checkAnswer('D')"></div>
         </div>
-        <div id="scoreContainer" style="display: none"></div>
+      </div>
+      <div id="scoreContainer" style="display: none">
+        <h1>Congrats!</h1>
+        <form>
+          <input
+            type="text"
+            placeholder="initials"
+            name="initials"
+            id="initials"
+            
+          />
+          <button
+            type="submit"
+            class="btn"
+            id="saveScoreBtn"
+            onclick="saveHS(event)"
+          >
+            Save
+          </button>
+        </form>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

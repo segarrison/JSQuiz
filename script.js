@@ -8,6 +8,11 @@ const choiceD = document.getElementById("D");
 const counter = document.getElementById("counter");
 const scoredis = document.getElementById("scoreContainer");
 
+const saveScoreBtn = document.getElementById("saveScoreBtn");
+
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+console.log(highScores);
+
 // create array of question objects
 let questions = [
   {
@@ -19,7 +24,8 @@ let questions = [
     correct: "A",
   },
   {
-    question: "String values must be enclosed within ____ when being assigned to variables.",
+    question:
+      "String values must be enclosed within ____ when being assigned to variables.",
     choiceA: "Square brackets",
     choiceB: "Double or single quotes",
     choiceC: "Curly brackets",
@@ -36,14 +42,11 @@ let questions = [
   },
 ];
 
-// create some variables
-
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let count = 45;
 const questionTime = 0;
 let TIMER;
-let score = 0;
 
 // render a question
 function renderQuestion() {
@@ -58,7 +61,7 @@ function renderQuestion() {
 
 start.addEventListener("click", startQuiz);
 
-// start quiz
+// start quiz, hide start button and display quiz questions. Also start timer
 function startQuiz() {
   start.style.display = "none";
   renderQuestion();
@@ -80,18 +83,20 @@ function renderCounter() {
   }
 }
 
-// checkAnwer
+// checks the answer and if wrong subtracts time
 
 function checkAnswer(answer) {
-  if (answer == questions[runningQuestion].correct) {
-    // answer is correct
-    score = score + 10;
-  } 
+  // answer is wrong subtract time
+  if (answer !== questions[runningQuestion].correct) {
+    count = count - 10;
+    
+    
+  }
   if (runningQuestion < lastQuestion) {
     runningQuestion++;
     renderQuestion();
   } else {
-    // end the quiz and show the score
+   
     clearInterval(TIMER);
     scoreRender();
   }
@@ -101,5 +106,28 @@ function checkAnswer(answer) {
 function scoreRender() {
   quiz.style.display = "none";
   scoredis.style.display = "block";
-  scoredis.innerHTML += "<p>You scored " + score + " points</p>";
+  scoredis.innerHTML += "<p>You scored " + count + " points</p>";
+  localStorage.setItem("recentScore", count);
+    console.log(count);
+ 
+    
+}
+  
+function saveHS(event) {
+  console.log("save button");
+  event.preventDefault();
+  const initialsInput = document.getElementById("initials"); 
+  console.log(initialsInput.value);
+  console.log(count);
+  const recentScore = localStorage.getItem("recentScore");
+  const uScore = {
+    score: recentScore,
+    name: initialsInput.value,
+  };
+  highScores.push(uScore);
+  highScores.sort(function(a,b){
+      return b.score - a.score;
+  });
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+  console.log(highScores);
 }
