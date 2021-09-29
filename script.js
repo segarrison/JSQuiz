@@ -114,6 +114,7 @@ function scoreRender() {
  
     
 }
+
   
 function saveHS(event) {
   console.log("save button");
@@ -132,6 +133,7 @@ function saveHS(event) {
   });
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log(highScores);
+  displayHighScores();
 }
 
 const highScoreContainer = document.getElementById("highScoreContainer");
