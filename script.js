@@ -46,9 +46,9 @@ const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let count = 45;
 const questionTime = 0;
-let TIMER;
+let timer = 0;
 
-// render a question
+// This creates the question display based on the current iteration of runningQuestion
 function renderQuestion() {
   let q = questions[runningQuestion];
 
@@ -67,40 +67,42 @@ function startQuiz() {
   renderQuestion();
   quiz.style.display = "block";
   renderCounter();
-  TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
+  timer = setInterval(renderCounter, 1000); // 1000ms = 1s
 }
 
-// counter render
+// checks the answer and if wrong subtracts time
+function checkAnswer(answer) {
+    // answer is wrong subtract time
+    if (answer !== questions[runningQuestion].correct) {
+      count = count - 10;
+      }
+    renderCounter();
+    if (runningQuestion < lastQuestion) {
+      runningQuestion++;
+      renderQuestion();
+    
+    } else {
+     
+      clearInterval(timer);
+      scoreRender();
+    }
+  }
 
+//creates counter display
 function renderCounter() {
   if (count >= questionTime) {
     counter.innerHTML = count;
 
     count--;
   } else {
-    clearInterval(TIMER);
+    clearInterval(timer);
     scoreRender();
   }
 }
 
-// checks the answer and if wrong subtracts time
 
-function checkAnswer(answer) {
-  // answer is wrong subtract time
-  if (answer !== questions[runningQuestion].correct) {
-    count = count - 10;
-    
-    
-  }
-  if (runningQuestion < lastQuestion) {
-    runningQuestion++;
-    renderQuestion();
-  } else {
-   
-    clearInterval(TIMER);
-    scoreRender();
-  }
-}
+
+
 
 // score render
 function scoreRender() {
@@ -147,8 +149,12 @@ function displayHighScores(){
     const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
     highScoreList.innerHTML = highScores
+    //using an arrow function to map a new array
     .map(score => {
+        //array elements are created using template literals using score.name and score.score as the placeholders
+        //returns a new li div with a string that comprises the initials and the score
         return `<li class="high-score">${score.name} - ${score.score}</li>`;
     })
+    //joins the li elements from the new array using an empty string
     .join("");
 };
