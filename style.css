@@ -92,7 +92,21 @@ header {
   flex-direction: column;
   align-items: center;
 }
-
+#highScoreContainer h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#highScoreContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#highScoreContainer button {
+  margin-left: 282.5px;
+}
 form {
   width: 100%;
   display: flex;
@@ -105,4 +119,3 @@ input {
   margin-bottom: 5px;
   padding: 10px;
 }
-

@@ -72,21 +72,19 @@ function startQuiz() {
 
 // checks the answer and if wrong subtracts time
 function checkAnswer(answer) {
-    // answer is wrong subtract time
-    if (answer !== questions[runningQuestion].correct) {
-      count = count - 10;
-      }
-    renderCounter();
-    if (runningQuestion < lastQuestion) {
-      runningQuestion++;
-      renderQuestion();
-    
-    } else {
-     
-      clearInterval(timer);
-      scoreRender();
-    }
+  // answer is wrong subtract time
+  if (answer !== questions[runningQuestion].correct) {
+    count = count - 10;
   }
+  renderCounter();
+  if (runningQuestion < lastQuestion) {
+    runningQuestion++;
+    renderQuestion();
+  } else {
+    clearInterval(timer);
+    scoreRender();
+  }
+}
 
 //creates counter display
 function renderCounter() {
@@ -106,16 +104,13 @@ function scoreRender() {
   scoredis.style.display = "block";
   scoredis.innerHTML += "<p>You scored " + count + " points</p>";
   localStorage.setItem("recentScore", count);
-    console.log(count);
- 
-    
+  console.log(count);
 }
 
-  
 function saveHS(event) {
   console.log("save button");
   event.preventDefault();
-  const initialsInput = document.getElementById("initials"); 
+  const initialsInput = document.getElementById("initials");
   console.log(initialsInput.value);
   console.log(count);
   const recentScore = localStorage.getItem("recentScore");
@@ -124,10 +119,10 @@ function saveHS(event) {
     name: initialsInput.value,
   };
   highScores.push(uScore);
-  highScores.sort(function(a,b){
-      return b.score - a.score;
+  highScores.sort(function (a, b) {
+    return b.score - a.score;
   });
-  localStorage.setItem('highScores', JSON.stringify(highScores));
+  localStorage.setItem("highScores", JSON.stringify(highScores));
   console.log(highScores);
   displayHighScores();
 }
@@ -136,28 +131,28 @@ const highScoreContainer = document.getElementById("highScoreContainer");
 highScoreContainer.addEventListener("click", displayHighScores);
 console.log("high scores clicked");
 
-function displayHighScores(){
-    console.log("high scores clicked");
-    start.style.display = "none";
-    quiz.style.display = "none";
-    scoredis.style.display = "none";
-    highScoreContainer.style.display ="block";
-    
-    const highScoreList = document.getElementById("highScoreList");
-    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+function displayHighScores() {
+  console.log("high scores clicked");
+  start.style.display = "none";
+  quiz.style.display = "none";
+  scoredis.style.display = "none";
+  highScoreContainer.style.display = "block";
 
-    highScoreList.innerHTML = highScores
+  const highScoreList = document.getElementById("highScoreList");
+  const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+  highScoreList.innerHTML = highScores
     //using an arrow function to map a new array
-    .map(score => {
-        //array elements are created using template literals using score.name and score.score as the placeholders
-        //returns a new li div with a string that comprises the initials and the score
-        return `<li class="high-score">${score.name} - ${score.score}</li>`;
+    .map((score) => {
+      //array elements are created using template literals using score.name and score.score as the placeholders
+      //returns a new li div with a string that comprises the initials and the score
+      return `<li class="high-score">${score.name} - ${score.score}</li>`;
     })
     //joins the li elements from the new array using an empty string
     .join("");
-    const newGame =document.getElementById("newGame");
-    newGame.addEventListener("click", restart);
-    function restart(){
-        location.reload();
-    };
-};
+  const newGame = document.getElementById("newGame");
+  newGame.addEventListener("click", restart);
+  function restart() {
+    location.reload();
+  }
+}
