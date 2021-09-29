@@ -100,10 +100,6 @@ function renderCounter() {
   }
 }
 
-
-
-
-
 // score render
 function scoreRender() {
   quiz.style.display = "none";
@@ -159,4 +155,9 @@ function displayHighScores(){
     })
     //joins the li elements from the new array using an empty string
     .join("");
+    const newGame =document.getElementById("newGame");
+    newGame.addEventListener("click", restart);
+    function restart(){
+        location.reload();
+    };
 };
