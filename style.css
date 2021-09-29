@@ -98,7 +98,7 @@ header {
   justify-content: center;
   align-items: center;
 }
-#highScoreContainer div {
+#highScoreContainer ol {
   display: flex;
   flex-direction: column;
   justify-content: center;
