@@ -131,3 +131,24 @@ function saveHS(event) {
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log(highScores);
 }
+
+const highScoreContainer = document.getElementById("highScoreContainer");
+highScoreContainer.addEventListener("click", displayHighScores);
+console.log("high scores clicked");
+
+function displayHighScores(){
+    console.log("high scores clicked");
+    start.style.display = "none";
+    quiz.style.display = "none";
+    scoredis.style.display = "none";
+    highScoreContainer.style.display ="block";
+    
+    const highScoreList = document.getElementById("highScoreList");
+    const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+    highScoreList.innerHTML = highScores
+    .map(score => {
+        return `<li class="high-score">${score.name} - ${score.score}</li>`;
+    })
+    .join("");
+};

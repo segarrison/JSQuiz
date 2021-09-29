@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <div id="hslink">High Scores</div>
+      <div id="hslink"><a href="#highScoresContainer" onclick="displayHighScores()">High Scores</a></div>
       <h1>Welcome to Coding Countdown</h1>
       <div id="timerdis">
         Time:
@@ -48,6 +48,11 @@
             Save
           </button>
         </form>
+      </div>
+      <div id = "highScoreContainer" style="display: none" >
+        <h1>High Scores!</h1>
+        <div id="highScoreList"></div>
+
       </div>
     </div>
     <script src="script.js"></script>
